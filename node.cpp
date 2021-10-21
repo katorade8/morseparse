@@ -1,9 +1,14 @@
 #include "node.h"
-#define ALPHABET_SIZE 26;
+#include <cstdlib>
+
 
 Node::Node() {
 	this->value = 0;
 	this->children = new Node * [26];
+}
+
+Node::~Node() {
+	delete(this->children);
 }
 
 int Node::getValue() {

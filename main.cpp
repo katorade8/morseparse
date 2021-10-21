@@ -1,10 +1,11 @@
 #include <iostream>
 #include <map>
+
 #include "node.h"
 #include "trie.h"
 
 
-int main() {
+int main(int argc, char **argv) {
 	std::map <const char, const char*> morseMap = {
 		{'a', ".="},
 		{'b', "-..."},
@@ -35,9 +36,12 @@ int main() {
 	};
 
 	Trie trie = Trie();
-	trie.addDictionary("notsobig.txt");
+	trie.addDictionary("../notsobig.txt");
 
-	std::cout << "added to trie with no errors\n";
+	std::cout << 'c' - 'a' << std::endl;
+	std::cout << trie.findWord("of") << std::endl;
+
+	//free alloc'd memory
 
 	return 0;
 }
