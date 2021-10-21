@@ -3,7 +3,7 @@
 
 Node::Node() {
 	this->value = 0;
-	this->children = new Node[26];
+	this->children = new Node * [26];
 }
 
 int Node::getValue() {
@@ -14,6 +14,6 @@ void Node::incrementValue() {
 	this->value++;
 }
 
-Node * Node::getChildren() {
+Node ** Node::getChildren() {
 	return this->children;
 }

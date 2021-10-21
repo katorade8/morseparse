@@ -3,9 +3,10 @@
 class Node {
 private:
 	int value;
-	Node * children;
+	Node ** children; //pointer to an array of Node pointers
 public:
+	Node();
 	int getValue();
 	void incrementValue();
-	Node * getChildren();
-}
+	Node ** getChildren();
+};

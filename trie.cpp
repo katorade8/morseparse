@@ -25,7 +25,7 @@ void Trie::addWord(std::string word) {
 		char c = word[i];
 		int index = c - 'a'; //index from char substraction
 		if(localRoot->getChildren()[index] == NULL) {
-			localRoot->getChildren()[index] = Node();
+			localRoot->getChildren()[index] = new Node();
 			nodeCount++;
 		}
 		localRoot = localRoot->getChildren()[index]; //set localRoot to child root
@@ -35,3 +35,6 @@ void Trie::addWord(std::string word) {
 	}
 }
 
+bool Trie::findWord(std::string word) {
+	return true;
+}

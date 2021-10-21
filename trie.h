@@ -3,11 +3,13 @@
 #include "node.h"
 
 class Trie {
-	private:
-		Node * root;
-		int nodeCount;
-		int wordCount;
-	public:
-		void addDictionary(std::string fileName);
-		void addWord(std::string word);
-}
+private:
+	Node * root;
+	int nodeCount;
+	int wordCount;
+public:
+	Trie();
+	void addDictionary(std::string fileName);
+	void addWord(std::string word);
+	bool findWord(std::string word);
+};
