@@ -10,9 +10,8 @@ Node::Node() {
 }
 
 void Node::initializeChildren() {
-	for(size_t i = 0; i < ALPHABET_SIZE; i++) {
+	for(size_t i = 0; i < ALPHABET_SIZE; i++)
 		this->children[i] = nullptr;
-	}
 }
 
 int Node::getValue() {

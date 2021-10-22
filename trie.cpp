@@ -12,25 +12,29 @@ Trie::Trie() {
 
 Trie::~Trie() {
 	int deleteCount = 0;
-	recursiveDestroy(this->root, deleteCount);
-	std::cerr << deleteCount << std::endl;
-	std::cerr << this->nodeCount << std::endl;
+	int recursionCount = 0;
+	recursiveDestroy(this->root, deleteCount, recursionCount);
+	std::cerr << "delete count: " << deleteCount << std::endl;
+	std::cerr << "recursion count: " << recursionCount << std::endl;
+	std::cerr << "total # nodes: " << this->nodeCount << std::endl;
 }
 
-void Trie::recursiveDestroy(Node * node, int &deleteCount) {
+void Trie::recursiveDestroy(Node * node, int &deleteCount, int &recursionCount) {
 	if(node != nullptr) {
 		Node ** children = node->getChildren();
-		for(size_t i = 0; i < ALPHABET_SIZE; i++) {
+		for(size_t i = 0; i < ALPHABET_SIZE; i++) { //NOT RECURSIVE!!!
 			Node * child = children[i]; //foreach loop?
 			if(child == nullptr) {
-				std::cerr << "deleting pointer\n";
+				//std::cerr << "deleting pointer\n";
 				deleteCount++;
 				delete(child);
-				return;
+				return; //prematurely exits for loop
 			}
-			else
-				std::cerr << "recursing\n";
-				recursiveDestroy(children[i], deleteCount);
+			else {
+				//std::cerr << "recursing\n";
+				recursionCount++;
+				recursiveDestroy(children[i], deleteCount, recursionCount);
+			}
 		}
 	}
 }

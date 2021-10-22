@@ -9,7 +9,7 @@ private:
 	Node * root;
 	int nodeCount;
 	int wordCount;
-	void recursiveDestroy(Node * node, int& deleteCount);
+	void recursiveDestroy(Node * node, int& deleteCount, int &recursionCount);
 public:
 	Trie();
 	virtual ~Trie();
