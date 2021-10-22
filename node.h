@@ -3,9 +3,9 @@
 class Node {
 private:
 	int value;
-	Node* children;
+	Node * children;
 public:
 	int getValue();
 	void incrementValue();
-	Node getChild(int index);
+	Node * getChildren();
 }

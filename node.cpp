@@ -14,6 +14,6 @@ void Node::incrementValue() {
 	this->value++;
 }
 
-Node Node::getChild(int index) {
-	return this->children[index];
+Node * Node::getChildren() {
+	return this->children;
 }
