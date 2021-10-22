@@ -11,14 +11,28 @@ Trie::Trie() {
 }
 
 Trie::~Trie() {
-	Node * parent;
-	Node * localRoot = root;
-	//have to implement recursive deletion?
-	for(size_t i = 0; i < ALPHABET_SIZE; i++) {
-		std::cerr << i << std::endl;
+	int deleteCount = 0;
+	recursiveDestroy(this->root, deleteCount);
+	std::cerr << deleteCount << std::endl;
+	std::cerr << this->nodeCount << std::endl;
+}
+
+void Trie::recursiveDestroy(Node * node, int &deleteCount) {
+	if(node != nullptr) {
+		Node ** children = node->getChildren();
+		for(size_t i = 0; i < ALPHABET_SIZE; i++) {
+			Node * child = children[i]; //foreach loop?
+			if(child == nullptr) {
+				std::cerr << "deleting pointer\n";
+				deleteCount++;
+				delete(child);
+				return;
+			}
+			else
+				std::cerr << "recursing\n";
+				recursiveDestroy(children[i], deleteCount);
+		}
 	}
-	localRoot->~Node();
-	delete(root);
 }
 
 void Trie::addDictionary(std::string fileName) {
@@ -27,9 +41,10 @@ void Trie::addDictionary(std::string fileName) {
 	if(!infile.is_open())
 		std::cerr << "unable to open file\n";
 	while(getline(infile, word)) {
-		for(size_t i = 0; i < word.length(); i++)
+		for(size_t i = 0; i < word.length(); i++) {
 			if(isupper(word[i])) //convert to lower case
-				word[i] = toupper(word[i]);
+				word[i] = tolower(word[i]);
+		}
 		addWord(word);
 	}
 }
@@ -39,7 +54,7 @@ void Trie::addWord(std::string word) {
 	for(size_t i = 0; i < word.length(); i++) {
 		char c = word[i];
 		int index = c - 'a'; //index from char substraction
-		if(localRoot->getChildren()[index] == NULL) {
+		if(localRoot->getChildren()[index] == nullptr) {
 			localRoot->getChildren()[index] = new Node();
 			nodeCount++;
 		}
@@ -54,7 +69,7 @@ bool Trie::findWord(std::string word) {
 	for(size_t i = 0; i < word.length(); i++) {
 		char c = word[i];
 		int index = c - 'a'; //index from char substraction
-		if(localRoot->getChildren()[index] == NULL)
+		if(localRoot->getChildren()[index] == nullptr)
 			return false;
 		localRoot = localRoot->getChildren()[index]; //set localRoot to child root
 	}
@@ -62,4 +77,8 @@ bool Trie::findWord(std::string word) {
 		return true; //valid word
 	else 
 		return false;
+}
+
+Node * Trie::getRoot() {
+	return this->root;
 }
